@@ -14,9 +14,9 @@ class GridManipulation:
     def __init__(self, experiment):
         self.experiment = experiment
      
-    def regrid_restart(self, other):
+    def regrid_restart(self, other, restart_path=None):
         """Regridding a restart file to the horizontal resolution of another. """
-        _lr = self.experiment.open_restart()
+        _lr = self.experiment.open_restart(restart_path)
         lr = self.extrapolate_restart_on_land(restart_ds=_lr)
         hr = other.open_restart()
 

@@ -116,6 +116,8 @@ class NemoExperiment:
             restart_files=[PurePath(restart_path)]
         else:
             pass
+        
+        print(restart_files)
         ds = xr.open_mfdataset(
             restart_files,
             preprocess=xn.domcfg.domcfg_preprocess,
