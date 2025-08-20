@@ -105,10 +105,9 @@ class NemoExperiment:
     def open_restart(self, restart_path=None):
         """ Open one or multiple restart files."""
         restart_files = []
-        for paths in sorted(Path(self.path).iterdir()):
-            if (str(self.namelist['namrun']['nn_itend']) + '_restart.nc') in PurePath(paths).name:
-                restart_files.append(PurePath(paths))
-
+        Path(self.path).glob('**/_restart.nc')
+        restart_files = list(Path(self.path).rglob(f'**/*{self.namelist['namrun']['nn_itend']}*_restart.nc'))
+    
         chunks = {}
         for dim in xr.open_dataset(restart_files[0]).dims:
             chunks[dim] = 1 if dim == 'nav_lev' else -1
